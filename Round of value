@@ -1,1 +1,25 @@
 
+Function RoundOf(valueTo As Double)
+    Dim dstr As String = valueTo
+    If dstr.IndexOf(".") >= 0 Then
+        Dim value As String = dstr.Substring(dstr.IndexOf(".") + 1, dstr.Length - dstr.IndexOf(".") - 1)
+        Dim add As Integer = 0
+        Dim temp As Integer
+
+        For Each v As Char In value.Reverse
+            temp = Integer.Parse(v) + add
+            If Integer.Parse(v) < 5 Then
+                add = 0
+            Else
+                add = 1
+            End If
+        Next
+
+        If temp < 5 Then
+            Return Math.Floor(valueTo)
+        Else
+            Return Math.Floor(valueTo) + 1
+        End If
+    End If
+    Return valueTo
+End Function
